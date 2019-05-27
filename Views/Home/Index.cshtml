@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@model Matrix.Models.matrix
+
+<div class="table-responsive">
+    <table class="table table-condensed" align="center">
+        @for (int column = 0; column < Model.Data.Length; column++)
+        {
+            <tr>
+                @for (int row = 0; row < Model.Data[column].Length; row++)
+                {
+                    <td>@Html.EditorFor(x => Model.Data[column][row])</td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="row" align="center">
+    <div class="col-md-3">
+        <button type="button" class="btn btn-primary" ONCLICK="window.location.href = '/Home/Read'">Upload</button>
+    </div>
+    <div class="col-md-3">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">Generation</button>
+    </div>
+    <div class="col-md-3">
+        <button type="button" class="btn btn-primary" ONCLICK="window.location.href = '/Home/Swap'">Rotate 90</button>
+    </div>
+    <div class="col-md-3">
+        <button type="button" class="btn btn-primary" ONCLICK="window.location.href = '/Home/Create'">Export</button>
+    </div>
+</div>
+
+@using (Html.BeginForm("Nvalue", "Home", FormMethod.Post))
+{
+    <div class="modal fade" id="Modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Change NxN</h4>
+                </div>
+                <div class="modal-body">
+                    <p>N: <input type="number" name="n" id="n"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
